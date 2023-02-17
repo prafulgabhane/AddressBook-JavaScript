@@ -119,6 +119,13 @@ function contactExists(firstName, lastName) {
     return addressBookArray.some(contact => contact.firstName == firstName && contact.lastName == lastName);
 }
 
+function addContact(contact) {
+    if (!contactExists(contact.firstName, contact.lastName)) 
+        addressBookArray.push(contact);
+    else 
+        throw "Contact is Present in the Address Book";
+}
+
 function editContact(firstName, lastName, property, newValue) {
     if (contactExists(firstName, lastName)) {
         switch (property) {
@@ -162,14 +169,12 @@ function getCountOfContacts(count) {
     return count;
 }
 
-try {
-    addressBookArray.push(new Contact("Praful", "Gabhane", "#3ac910", "Pune", "Maharashtra", "560 043", "91 977777524", "pg@gmail.com"));
-} catch (e) {
-    console.error(e);
-}
+let firstContact = new Contact("Praful", "Gabhane", "#3ac910", "Mumbai", "Maharashtra", "560 043", "91 777777777", "dp@gmail.com");
+let secondContact = new Contact("Preeti", "Gabhane", "#6ac810", "Pune", "Maharashtra", "123 569", "91 9898989897", "ks@gmail.com");
 
 try {
-    addressBookArray.push(new Contact("Bhawana", "Giripunje", "#6ac810", "Mumbai", "Maharashtra", "234 567", "91 7272876098", "bp@gmail.com"));
+    addressBookArray.push(firstContact);
+    addressBookArray.push(secondContact);
 } catch (e) {
     console.error(e);
 }
@@ -177,11 +182,21 @@ try {
 console.log(addressBookArray);
 
 console.log("\nAfter Editing Contact");
-editContact("Praful", "Gabhane", "Pune", "Maharashtra");
+editContact("Praful", "Gabhane", "Mumbai", "Maharashtra");
 console.log(addressBookArray);
+
+console.log("\nCount of Contacts : " + addressBookArray.reduce(getCountOfContacts, 0));
 
 console.log("\nAfter Deleting Contact");
 deleteContact("Praful", "Gabhane");
 console.log(addressBookArray);
 
 console.log("\nCount of Contacts : " + addressBookArray.reduce(getCountOfContacts, 0));
+
+console.log("\nAdding Duplicate Contact");
+try {
+    addContact(secondContact);
+} catch (e) {
+    console.error(e);
+}
+console.log(addressBookArray);
