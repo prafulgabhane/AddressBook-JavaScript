@@ -113,10 +113,17 @@ class Contact{
     }
 }
 
+let addressBookArray = new Array();
 try{
 let contact = new Contact("Praful", "Gabhane", "Mumbai", "Maharastra", 400025, 77777777, "praful@gmail.com");
 console.log(contact.toString());
 }
 catch(e){
-    console.log(e);
+    console.error(e);
 }
+try{
+    addressBookArray.push(new Contact("Preeti", "Gabhane", "#3ac910", "Mumbai", "Maharashtra", "400 0775", "91 7777744484", "preeti@gmail.com"));
+}catch(e){
+    console.error(e);
+}
+console.log(addressBookArray);
